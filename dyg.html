@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diego &amp; Giselle — 05.09.2026</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='22' cy='32' r='14' fill='none' stroke='%23C9A96E' stroke-width='5'/%3E%3Ccircle cx='42' cy='32' r='14' fill='none' stroke='%23C9A96E' stroke-width='5'/%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ===================================================
+       VARIABLES & RESET
+    =================================================== */
+    :root {
+      --cream:       #FAF8F5;
+      --dark:        #2C2C2C;
+      --gold:        #C9A96E;
+      --gold-light:  #E8D5B0;
+      --terracota:   #E8C4A0;
+      --white:       #FFFFFF;
+      --gray-light:  #F0EDE8;
+      --gray-mid:    #8B8178;
+      --font-serif:  'Playfair Display', Georgia, serif;
+      --font-sans:   'Montserrat', sans-serif;
+      --ease:        all 0.4s ease;
+      --shadow:      0 4px 24px rgba(44,44,44,.08);
+      --shadow-h:    0 12px 48px rgba(44,44,44,.15);
+      --radius:      16px;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    img { display:block; max-width:100%; }
+    a   { text-decoration:none; color:inherit; }
+
+    /* ===================================================
+       UTILITIES
+    =================================================== */
+    .container { max-width:1200px; margin:0 auto; padding:0 2rem; }
+
+    .tag {
+      display:block;
+      font-size:.72rem; font-weight:500;
+      letter-spacing:.3em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:.875rem;
+    }
+    .section-title {
+      font-family:var(--font-serif);
+      font-size:clamp(1.9rem,4vw,3rem);
+      font-weight:600; line-height:1.2;
+    }
+    .divider {
+      width:56px; height:2px;
+      background:var(--gold); margin:1.4rem 0;
+    }
+    .divider.center { margin:1.4rem auto; }
+
+    /* Buttons */
+    .btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.8rem 1.75rem; border-radius:50px;
+      font-family:var(--font-sans);
+      font-size:.72rem; font-weight:600;
+      letter-spacing:.15em; text-transform:uppercase;
+      cursor:pointer; border:none; transition:var(--ease);
+    }
+    .btn-gold  { background:var(--gold); color:#fff; }
+    .btn-gold:hover { background:#b8926a; transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,169,110,.4); }
+    .btn-outline { background:transparent; border:1.5px solid var(--dark); color:var(--dark); }
+    .btn-outline:hover { background:var(--dark); color:#fff; transform:translateY(-2px); }
+    .btn-outline-w { background:transparent; border:1.5px solid rgba(255,255,255,.6); color:#fff; }
+    .btn-outline-w:hover { background:rgba(255,255,255,.15); }
+    .btn-outline-g { background:transparent; border:1.5px solid var(--gold); color:var(--gold); }
+    .btn-outline-g:hover { background:var(--gold); color:#fff; }
+
+    /* Fade-in animation */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(28px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @keyframes bounce {
+      0%,100% { transform:rotate(45deg) translateY(0); }
+      50%      { transform:rotate(45deg) translateY(6px); }
+    }
+    .fi { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+    .fi.visible { opacity:1; transform:translateY(0); }
+
+    /* ===================================================
+       NAVIGATION
+    =================================================== */
+    .nav {
+      position:fixed; top:0; left:0; right:0;
+      z-index:1000; padding:1.5rem 0;
+      transition:var(--ease);
+    }
+    .nav.scrolled {
+      background:rgba(250,248,245,.96);
+      backdrop-filter:blur(12px);
+      padding:1rem 0;
+      box-shadow:0 2px 20px rgba(0,0,0,.06);
+    }
+    .nav-inner {
+      display:flex; align-items:center; justify-content:space-between;
+      max-width:1200px; margin:0 auto; padding:0 2rem;
+    }
+    .nav-logo {
+      font-family:var(--font-serif); font-size:1.5rem;
+      font-style:italic; color:#fff; transition:var(--ease);
+    }
+    .nav.scrolled .nav-logo { color:var(--dark); }
+
+    .nav-links { display:flex; align-items:center; gap:2rem; list-style:none; }
+    .nav-links a {
+      font-size:.7rem; font-weight:500; letter-spacing:.15em; text-transform:uppercase;
+      color:rgba(255,255,255,.9); transition:var(--ease);
+    }
+    .nav.scrolled .nav-links a { color:var(--dark); }
+    .nav-links a:hover { color:var(--gold); }
+    .nav-links .nav-rsvp {
+      background:var(--gold) !important; color:#fff !important;
+      padding:.45rem 1.2rem; border-radius:50px;
+    }
+    .nav-links .nav-rsvp:hover { background:#b8926a !important; }
+
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+    .hamburger span { display:block; width:24px; height:2px; background:#fff; transition:var(--ease); }
+    .nav.scrolled .hamburger span { background:var(--dark); }
+
+    /* ===================================================
+       HERO
+    =================================================== */
+    #inicio {
+      position:relative; height:100vh; min-height:700px;
+      display:flex; align-items:center; justify-content:center;
+      text-align:center; overflow:hidden;
+    }
+    .hero-bg {
+      position:absolute; inset:0;
+      background:url('https://static.wixstatic.com/media/11062b_614520e381864d63995d299c34aa762c~mv2.jpg/v1/fill/w_2084,h_1320,fp_0.50_0.50,q_90,usm_1.20_1.00_0.01,enc_avif,quality_auto/11062b_614520e381864d63995d299c34aa762c~mv2.jpg') center/cover no-repeat;
+      transform:scale(1);
+    }
+    .hero-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to bottom,rgba(20,20,20,.3) 0%,rgba(20,20,20,.55) 55%,rgba(20,20,20,.4) 100%);
+    }
+    .hero-body {
+      position:relative; z-index:2; color:#fff;
+      animation:fadeUp 1.2s ease both;
+    }
+    .hero-sub {
+      font-size:.72rem; font-weight:500; letter-spacing:.4em;
+      text-transform:uppercase; color:var(--gold-light);
+      margin-bottom:1.5rem; display:block;
+    }
+    .hero-names {
+      font-family:var(--font-serif);
+      font-size:clamp(3.5rem,9vw,7.5rem);
+      font-weight:600; line-height:1.02; margin-bottom:1.4rem;
+    }
+    .hero-names .amp { font-style:italic; color:var(--gold-light); }
+    .hero-date {
+      font-size:.9rem; font-weight:300;
+      letter-spacing:.3em; text-transform:uppercase;
+      color:rgba(255,255,255,.85); margin-bottom:3rem;
+    }
+
+    /* Countdown */
+    .countdown {
+      display:flex; gap:1.75rem; justify-content:center; margin-bottom:3rem;
+    }
+    .cd-item { display:flex; flex-direction:column; align-items:center; gap:.2rem; }
+    .cd-num {
+      font-family:var(--font-serif);
+      font-size:clamp(2rem,4vw,3.2rem); font-weight:700; line-height:1;
+      min-width:2.2ch; text-align:center;
+    }
+    .cd-lbl {
+      font-size:.58rem; font-weight:500; letter-spacing:.25em;
+      text-transform:uppercase; color:var(--gold-light);
+    }
+    .cd-sep {
+      font-family:var(--font-serif); font-size:2.5rem;
+      font-weight:300; opacity:.4; align-self:center;
+    }
+
+    .hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+    .scroll-hint {
+      position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+      z-index:2; display:flex; flex-direction:column; align-items:center; gap:.5rem;
+      color:rgba(255,255,255,.5); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    }
+    .scroll-arrow {
+      width:18px; height:18px;
+      border-right:1.5px solid rgba(255,255,255,.45);
+      border-bottom:1.5px solid rgba(255,255,255,.45);
+      transform:rotate(45deg);
+      animation:bounce 2s infinite;
+    }
+
+    /* ===================================================
+       NUESTRA HISTORIA
+    =================================================== */
+    #historia { padding:8rem 0; background:var(--white); }
+    .historia-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center;
+    }
+    .historia-imgs { position:relative; }
+    .historia-main {
+      width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:var(--radius);
+    }
+    .historia-accent {
+      position:absolute; width:46%; aspect-ratio:1; object-fit:cover;
+      border-radius:50%; bottom:-2rem; right:-2rem;
+      border:6px solid var(--white); box-shadow:var(--shadow);
+    }
+    .historia-badge {
+      position:absolute; top:2rem; left:-1.5rem;
+      background:var(--gold); color:#fff;
+      font-family:var(--font-serif); font-size:1.15rem; font-style:italic;
+      padding:.7rem 1.2rem; border-radius:8px; box-shadow:var(--shadow);
+    }
+    .historia-body p { color:var(--gray-mid); font-size:.95rem; font-weight:300; margin-bottom:1.4rem; }
+
+    /* Timeline */
+    .timeline { margin-top:2.5rem; display:flex; flex-direction:column; }
+    .tl-item {
+      display:flex; gap:1.4rem; padding-bottom:2rem; position:relative;
+    }
+    .tl-item:not(:last-child)::after {
+      content:''; position:absolute;
+      left:19px; top:40px; bottom:0;
+      width:1px; background:var(--gold-light);
+    }
+    .tl-dot {
+      flex-shrink:0; width:40px; height:40px; border-radius:50%;
+      background:var(--gold); display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-serif); font-size:.72rem; font-style:italic; color:#fff;
+      box-shadow:0 4px 12px rgba(201,169,110,.3);
+    }
+    .tl-body h4 { font-family:var(--font-serif); font-size:1rem; font-weight:600; margin-bottom:.2rem; }
+    .tl-body p  { font-size:.85rem; color:var(--gray-mid); font-weight:300; }
+
+    /* ===================================================
+       CEREMONIA
+    =================================================== */
+    #ceremonia { padding:8rem 0; background:var(--cream); }
+    .section-center { text-align:center; margin-bottom:4rem; }
+
+    /* Info Cards */
+    .info-cards {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:1.5rem; margin-bottom:4.5rem;
+    }
+    .icard {
+      background:var(--white); border-radius:var(--radius);
+      padding:2.5rem 2rem; text-align:center;
+      box-shadow:var(--shadow); transition:var(--ease);
+    }
+    .icard:hover { transform:translateY(-4px); box-shadow:var(--shadow-h); }
+    .icard svg { width:48px; height:48px; color:var(--gold); margin:0 auto 1.25rem; }
+    .icard h3 { font-family:var(--font-serif); font-size:1.05rem; font-weight:600; margin-bottom:.6rem; }
+    .icard .hi { color:var(--dark); font-weight:500; font-size:.9rem; }
+    .icard p   { font-size:.85rem; color:var(--gray-mid); font-weight:300; line-height:1.6; }
+
+    /* Day Schedule */
+    .schedule-title {
+      font-family:var(--font-serif); font-size:1.7rem;
+      text-align:center; margin-bottom:2.5rem;
+    }
+    .schedule {
+      display:flex; justify-content:center; gap:0; flex-wrap:wrap;
+      margin-bottom:4.5rem;
+    }
+    .sch-item {
+      display:flex; flex-direction:column; align-items:center;
+      text-align:center; padding:0 2.5rem; position:relative;
+    }
+    .sch-item:not(:last-child)::after {
+      content:'→'; position:absolute;
+      right:-.3rem; top:1.3rem;
+      color:var(--gold); font-size:1.1rem;
+    }
+    .sch-time  { font-family:var(--font-serif); font-size:1.45rem; color:var(--gold); font-weight:600; margin-bottom:.35rem; }
+    .sch-label { font-size:.78rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; }
+    .sch-sub   { font-size:.72rem; color:var(--gray-mid); margin-top:.2rem; }
+
+    /* Dress Code Block */
+    .dress-block {
+      background:var(--dark); border-radius:var(--radius);
+      padding:3.5rem; display:grid;
+      grid-template-columns:1fr 1fr; gap:3rem; align-items:start;
+    }
+    .dress-block h3 { font-family:var(--font-serif); font-size:1.8rem; color:#fff; margin-bottom:.875rem; }
+    .dress-block > div:first-child p { color:rgba(255,255,255,.6); font-size:.88rem; font-weight:300; margin-bottom:1.5rem; }
+    .palette { display:flex; gap:.75rem; flex-wrap:wrap; }
+    .swatch-item { display:flex; flex-direction:column; align-items:center; gap:.4rem; }
+    .swatch { width:46px; height:46px; border-radius:50%; border:2px solid rgba(255,255,255,.15); }
+    .swatch-name { font-size:.62rem; color:rgba(255,255,255,.45); text-align:center; }
+
+    .rules-title { font-family:var(--font-serif); font-size:1.1rem; color:var(--gold); margin-bottom:1rem; }
+    .rules-list { list-style:none; display:flex; flex-direction:column; gap:.7rem; }
+    .rules-list li {
+      font-size:.84rem; color:rgba(255,255,255,.7); font-weight:300;
+      padding-left:1.4rem; position:relative; line-height:1.5;
+    }
+    .rules-list li::before {
+      content:'◆'; position:absolute; left:0;
+      color:var(--gold); font-size:.48rem; top:.4em;
+    }
+
+    /* ===================================================
+       GALERÍA
+    =================================================== */
+    #galeria { padding:8rem 0; background:var(--white); }
+
+    .carousel-wrap { position:relative; overflow:hidden; border-radius:var(--radius); }
+    .carousel-track { display:flex; transition:transform .6s cubic-bezier(.25,.46,.45,.94); }
+    .c-slide { flex-shrink:0; width:calc(100%/3); aspect-ratio:3/4; overflow:hidden; }
+    .c-slide img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+    .c-slide:hover img { transform:scale(1.05); }
+
+    .c-btn {
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:46px; height:46px; border-radius:50%;
+      background:rgba(250,248,245,.92); border:none; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 16px rgba(0,0,0,.12); transition:var(--ease); z-index:10;
+    }
+    .c-btn:hover { background:#fff; box-shadow:0 8px 24px rgba(0,0,0,.18); transform:translateY(-50%) scale(1.05); }
+    .c-btn-prev { left:1.25rem; }
+    .c-btn-next { right:1.25rem; }
+    .c-btn svg  { width:18px; height:18px; color:var(--dark); }
+
+    .c-dots { display:flex; justify-content:center; gap:.5rem; margin-top:1.5rem; }
+    .c-dot {
+      width:8px; height:8px; border-radius:50%;
+      background:var(--gold-light); border:none; cursor:pointer;
+      transition:var(--ease); padding:0;
+    }
+    .c-dot.active { background:var(--gold); transform:scale(1.3); }
+
+    /* ===================================================
+       MESA DE REGALOS
+    =================================================== */
+    #regalos { padding:8rem 0; background:var(--cream); }
+    .regalos-intro {
+      text-align:center; max-width:580px; margin:0 auto 3.5rem;
+      color:var(--gray-mid); font-size:.93rem; font-weight:300;
+    }
+
+    .gift-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:1.5rem; margin-bottom:2.5rem;
+    }
+    .gift-card {
+      background:var(--white); border-radius:var(--radius);
+      padding:2.5rem 2rem; text-align:center;
+      box-shadow:var(--shadow); transition:var(--ease);
+      display:flex; flex-direction:column; align-items:center; gap:1rem;
+    }
+    .gift-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-h); }
+    .gift-logo {
+      width:64px; height:64px; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .gift-card h3 { font-family:var(--font-serif); font-size:1.05rem; font-weight:600; }
+    .gift-card p   { font-size:.84rem; color:var(--gray-mid); font-weight:300; flex:1; }
+
+    .bank-box {
+      background:var(--gray-light); border-radius:var(--radius);
+      padding:2.5rem; text-align:center;
+    }
+    .bank-box h3 { font-family:var(--font-serif); font-size:1.3rem; margin-bottom:.6rem; }
+    .bank-box > p { font-size:.875rem; color:var(--gray-mid); margin-bottom:1.5rem; }
+    .bank-table {
+      display:inline-flex; flex-direction:column; gap:.5rem;
+      text-align:left; background:#fff;
+      border-radius:8px; padding:1.25rem 2rem; font-size:.875rem;
+    }
+    .bank-table span { color:var(--gray-mid); }
+    .bank-table strong { color:var(--dark); }
+
+    /* ===================================================
+       SEDE & HOSPEDAJE
+    =================================================== */
+    #sede { padding:8rem 0; background:var(--white); }
+
+    .sede-layout {
+      display:grid; grid-template-columns:1.2fr .8fr;
+      gap:3rem; margin-bottom:5rem;
+    }
+    .map-box {
+      border-radius:var(--radius); overflow:hidden;
+      height:420px; box-shadow:var(--shadow);
+    }
+    .map-box iframe { width:100%; height:100%; border:0; }
+
+    .venue-card { display:flex; flex-direction:column; justify-content:center; }
+    .venue-card h3 { font-family:var(--font-serif); font-size:1.65rem; margin-bottom:.4rem; }
+    .venue-addr { font-size:.88rem; color:var(--gray-mid); font-weight:300; margin-bottom:1.4rem; line-height:1.6; }
+    .venue-feats { display:flex; flex-direction:column; gap:.7rem; margin-bottom:2rem; }
+    .venue-feat {
+      display:flex; align-items:center; gap:.75rem;
+      font-size:.86rem; color:var(--gray-mid);
+    }
+    .venue-feat svg { color:var(--gold); flex-shrink:0; }
+
+    .hotels-title {
+      font-family:var(--font-serif); font-size:1.8rem;
+      text-align:center; margin-bottom:2.5rem;
+    }
+    .hotels-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+      gap:1.5rem;
+    }
+    .hotel-card {
+      border-radius:var(--radius); overflow:hidden;
+      background:var(--white); box-shadow:var(--shadow); transition:var(--ease);
+    }
+    .hotel-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-h); }
+    .hotel-img { width:100%; height:180px; object-fit:cover; }
+    .hotel-body { padding:1.75rem; }
+    .hotel-stars { color:var(--gold); font-size:.72rem; margin-bottom:.5rem; }
+    .hotel-name  { font-family:var(--font-serif); font-size:1.1rem; font-weight:600; margin-bottom:.4rem; }
+    .hotel-dist  { font-size:.72rem; color:var(--gold); font-weight:500; margin-bottom:.7rem; }
+    .hotel-desc  { font-size:.84rem; color:var(--gray-mid); font-weight:300; margin-bottom:1.2rem; line-height:1.6; }
+    .hotel-price { font-size:.8rem; color:var(--gray-mid); margin-bottom:1.2rem; }
+    .hotel-price strong { font-size:1.05rem; color:var(--dark); }
+
+    /* ===================================================
+       RSVP
+    =================================================== */
+    #rsvp { padding:8rem 0; background:var(--cream); }
+
+    .rsvp-wrap {
+      max-width:600px; margin:0 auto;
+      background:var(--white); border-radius:var(--radius);
+      padding:3.5rem; box-shadow:var(--shadow);
+    }
+    .form-group { margin-bottom:1.4rem; }
+    .form-label {
+      display:block; font-size:.72rem; font-weight:600;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:var(--dark); margin-bottom:.5rem;
+    }
+    .form-input {
+      width:100%; padding:.875rem 1rem;
+      border:1.5px solid var(--gray-light); border-radius:8px;
+      font-family:var(--font-sans); font-size:.9rem; color:var(--dark);
+      background:var(--cream); outline:none; transition:var(--ease);
+    }
+    .form-input:focus { border-color:var(--gold); background:#fff; }
+    .form-input::placeholder { color:var(--gray-mid); }
+    textarea.form-input { resize:vertical; min-height:96px; }
+
+    .radio-group { display:flex; gap:1rem; flex-wrap:wrap; }
+    .r-label {
+      display:flex; align-items:center; gap:.5rem; cursor:pointer;
+      font-size:.875rem; padding:.6rem 1.25rem;
+      border:1.5px solid var(--gray-light); border-radius:50px; transition:var(--ease);
+      user-select:none;
+    }
+    .r-label input { display:none; }
+    .r-label.picked { border-color:var(--gold); background:rgba(201,169,110,.08); color:var(--gold); }
+
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+
+    .form-success { display:none; text-align:center; padding:2rem; }
+    .form-success h3 { font-family:var(--font-serif); font-size:1.5rem; color:var(--gold); margin-bottom:.7rem; }
+    .form-success p  { color:var(--gray-mid); font-size:.88rem; }
+
+    /* ===================================================
+       FOOTER
+    =================================================== */
+    footer {
+      background:var(--dark); padding:4rem 0 2rem;
+      text-align:center; color:rgba(255,255,255,.55);
+    }
+    .footer-mono { font-family:var(--font-serif); font-size:3rem; font-style:italic; color:var(--gold); margin-bottom:.875rem; }
+    .footer-tag  { font-size:.875rem; letter-spacing:.15em; color:rgba(255,255,255,.8); margin-bottom:.4rem; }
+    .footer-date { font-family:var(--font-serif); font-size:.875rem; color:rgba(255,255,255,.35); margin-bottom:2.5rem; }
+    .footer-contacts { display:flex; justify-content:center; gap:2.5rem; margin-bottom:3rem; flex-wrap:wrap; }
+    .fc { display:flex; flex-direction:column; gap:.2rem; font-size:.8rem; }
+    .fc span:first-child { font-size:.62rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--gold); }
+    .footer-hr { width:60px; height:1px; background:rgba(255,255,255,.1); margin:0 auto 2rem; }
+    .footer-copy { font-size:.72rem; color:rgba(255,255,255,.22); }
+
+    /* ===================================================
+       RESPONSIVE
+    =================================================== */
+    @media (max-width:900px) {
+      .historia-grid,
+      .sede-layout,
+      .dress-block { grid-template-columns:1fr; gap:2.5rem; }
+      .historia-accent { display:none; }
+      .historia-badge  { left:1rem; }
+      .c-slide  { width:100%; }
+      .sch-item:not(:last-child)::after { display:none; }
+      .schedule { gap:1.5rem; }
+    }
+    @media (max-width:768px) {
+      .nav-links  { display:none; }
+      .hamburger  { display:flex; }
+      .countdown  { gap:1rem; }
+      .form-row   { grid-template-columns:1fr; }
+      .rsvp-wrap  { padding:2rem; }
+    }
+    /* Mobile nav open state */
+    .nav-links.open {
+      display:flex !important; flex-direction:column;
+      position:absolute; top:100%; left:0; right:0;
+      background:rgba(250,248,245,.98);
+      padding:1rem 2rem 1.5rem;
+      box-shadow:0 8px 24px rgba(0,0,0,.1);
+    }
+    .nav-links.open a { color:var(--dark) !important; }
+  </style>
+</head>
+<body>
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <span class="nav-logo">D &amp; G</span>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#historia">Nuestra Historia</a></li>
+      <li><a href="#ceremonia">Detalles</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#regalos">Regalos</a></li>
+      <li><a href="#sede">Sede</a></li>
+      <li><a href="#rsvp" class="nav-rsvp">RSVP</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+<section id="inicio">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <!--<span class="hero-sub">Nos casamos</span>-->
+    <h1 class="hero-names">
+      Giselle<br>
+      <span class="amp">&amp;</span><br>
+      Diego
+    </h1>
+    <p class="hero-date">Sábado &middot; 5 de Septiembre de 2026</p>
+
+    <!-- Countdown (auto-calculated from WEDDING_DATE in JS) -->
+    <div class="countdown" id="countdown">
+      <div class="cd-item"><span class="cd-num" id="cdDays">00</span><span class="cd-lbl">Días</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-item"><span class="cd-num" id="cdHours">00</span><span class="cd-lbl">Horas</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-item"><span class="cd-num" id="cdMins">00</span><span class="cd-lbl">Mins</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-item"><span class="cd-num" id="cdSecs">00</span><span class="cd-lbl">Segs</span></div>
+    </div>
+
+    <div class="hero-btns">
+      <a href="#rsvp" class="btn btn-gold">Confirmar Asistencia</a>
+      <a href="#historia" class="btn btn-outline-w">Nuestra Historia</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- =====================================================
+     NUESTRA HISTORIA
+===================================================== -->
+<section id="historia">
+  <div class="container">
+    <div class="historia-grid">
+
+      <!-- Image column -->
+      <div class="historia-imgs fi">
+        <!-- TODO: Replace with your own couple photo -->
+        <img class="historia-main"
+          src="https://i.pinimg.com/736x/49/1e/32/491e32ff334677ebe9633c32f796dd27.jpg"
+          alt="Nuestra historia" loading="lazy">
+        <img class="historia-accent"
+          src="https://i.pinimg.com/236x/36/fd/37/36fd37b36422bec0539dba77a11023ad.jpg"
+          alt="Ceremonia" loading="lazy">
+        <div class="historia-badge">2016</div>
+      </div>
+
+      <!-- Text column -->
+      <div class="fi">
+        <span class="tag">Nuestra Historia</span>
+        <h2 class="section-title">Una historia de amor que comenzó casi sin querer</h2>
+        <div class="divider"></div>
+        <p>Nos conocimos en la universidad sin saber que el destino ya escribía nuestra historia. Hoy caminamos juntos, convirtiendo aquella coincidencia en el amor de nuestras vidas.</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot">2018</div>
+            <div class="tl-body">
+              <h4>Primer Cita</h4>
+              <p>Nuestra primera cita fue en el Golfito, una tarde lluviosa que hizo todo más especial.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot">2023</div>
+            <div class="tl-body">
+              <h4>Nuestro Primer Hogar</h4>
+              <p>En 2023 dimos el siguiente paso: rentamos nuestro primer depa y empezamos a construir nuestro hogar juntos.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot">2024</div>
+            <div class="tl-body">
+              <h4>La propuesta</h4>
+              <p>En medio de un hike, entre naturaleza y silencio llegó la pregunta que selló nuestro para siempre.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     CEREMONIA
+===================================================== -->
+<section id="ceremonia">
+  <div class="container">
+
+    <div class="section-center fi">
+      <span class="tag">El Gran Día</span>
+      <h2 class="section-title">Detalles de la Celebración</h2>
+      <div class="divider center"></div>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="info-cards">
+      <div class="icard fi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <h3>Fecha &amp; Hora</h3>
+        <p class="hi">Sábado, 5 de Septiembre 2026</p>
+        <p>Recepción desde las 12:30 PM<br>Ceremonia a la 1:00 PM</p>
+      </div>
+
+      <div class="icard fi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <h3>Lugar</h3>
+        <p class="hi">Jardín de Eventos Piedrasanta</p>
+        <p>Tepoztlán, Morelos<br>México</p>
+      </div>
+
+      <div class="icard fi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/>
+        </svg>
+        <h3>Código de Vestimenta</h3>
+        <p class="hi">Formal</p>
+        <p>Mujeres: evitar blanco, rojo y negro<br>Hombres: vestimenta formal</p>
+      </div>
+
+      <div class="icard fi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <h3>Información General</h3>
+        <p>Sólo adultos<br>Valet parking incluido<br><!-- TODO: Agregar fecha límite RSVP -->RSVP próximamente</p>
+      </div>
+    </div>
+
+    <!-- Day Schedule -->
+    <div class="fi">
+      <h3 class="schedule-title">Itinerario del Día</h3>
+      <div class="schedule">
+        <div class="sch-item">
+          <div class="sch-time">12:30</div>
+          <div class="sch-label">Recepción</div>
+          <div class="sch-sub">Bienvenida de invitados</div>
+        </div>
+        <div class="sch-item">
+          <div class="sch-time">1:00 PM</div>
+          <div class="sch-label">Ceremonia</div>
+          <div class="sch-sub">Religiosa Católica</div>
+        </div>
+        <div class="sch-item">
+          <div class="sch-time">2:00 pm</div>
+          <div class="sch-label">Cóctel</div>
+          <div class="sch-sub">Jardín del venue</div>
+        </div>
+        <div class="sch-item">
+          <div class="sch-time">3:00 pm</div>
+          <div class="sch-label">Comida &amp; Baile</div>
+          <div class="sch-sub">Salón principal</div>
+        </div>
+        <div class="sch-item">
+          <div class="sch-time">1:00 AM</div>
+          <div class="sch-label">Fin de Fiesta</div>
+          <div class="sch-sub">Último brindis</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dress Code + Rules -->
+    <div class="dress-block fi">
+      <div>
+        <h3>Código de Vestimenta</h3>
+        <p><strong style="color:rgba(255,255,255,.85)">Mujeres:</strong> evitar vestidos blancos, rojos y negros. Sugerimos tonos como blanco hueso, arena y colores suaves.<br><br><strong style="color:rgba(255,255,255,.85)">Hombres:</strong> vestimenta formal.</p>
+        <div class="palette">
+          <div class="swatch-item"><div class="swatch" style="background:#F5F0E8"></div><span class="swatch-name">Blanco hueso</span></div>
+          <div class="swatch-item"><div class="swatch" style="background:#C4A882"></div><span class="swatch-name">Arena</span></div>
+          <div class="swatch-item"><div class="swatch" style="background:#E8E0D0"></div><span class="swatch-name">Crema</span></div>
+          <div class="swatch-item"><div class="swatch" style="background:#B5C4B1"></div><span class="swatch-name">Salvia</span></div>
+          <div class="swatch-item"><div class="swatch" style="background:#C4B7C9"></div><span class="swatch-name">Lavanda</span></div>
+        </div>
+      </div>
+      <div>
+        <p class="rules-title">Reglas Generales</p>
+        <ul class="rules-list">
+          <li>El evento es exclusivo para adultos</li>
+          <li>Valet parking incluido (acceso desde las 12:30 p.m.)</li>
+          <li>Mujeres: evitar blanco, rojo y negro</li>
+          <li>#D&G2026</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =====================================================
+     GALERÍA
+===================================================== -->
+<section id="galeria">
+  <div class="container">
+
+    <div class="section-center fi">
+      <span class="tag">Nuestros Momentos</span>
+      <h2 class="section-title">Una vida juntos en imágenes</h2>
+      <div class="divider center"></div>
+    </div>
+
+    <div class="fi">
+      <div class="carousel-wrap" id="carouselWrap"
+           onmouseenter="pauseCarousel()" onmouseleave="resumeCarousel()">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- TODO: Replace these photos with your own couple/engagement photos -->
+          <div class="c-slide"><img src="https://i.pinimg.com/736x/c5/0c/b0/c50cb01c8d25617a1f541ce6796024a1.jpg" alt="Ceremonia" loading="lazy"></div>
+          <div class="c-slide"><img src="https://i.pinimg.com/236x/95/93/30/959330a3099f6ff39ebb9f20da55ee5a.jpg" alt="Anillos" loading="lazy"></div>
+          <div class="c-slide"><img src="https://i.pinimg.com/736x/0c/2a/d0/0c2ad08649aaee8d1833df3d09281925.jpg" alt="Ceremonia al aire libre" loading="lazy"></div>
+          <div class="c-slide"><img src="https://i.pinimg.com/474x/bf/ff/0c/bfff0c054d82583206bb22f4e8acb820.jpg" alt="Pareja" loading="lazy"></div>
+          <div class="c-slide"><img src="https://i.pinimg.com/736x/a2/f6/52/a2f652f749bb6b863851c32fd5aa0451.jpg" alt="Retrato" loading="lazy"></div>
+          <div class="c-slide"><img src="https://i.pinimg.com/736x/d7/bf/27/d7bf27dd899e87eeb70d105ec81f119a.jpg" alt="Baile" loading="lazy"></div>
+        </div>
+        <button class="c-btn c-btn-prev" onclick="moveCarousel(-1)" aria-label="Anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="c-btn c-btn-next" onclick="moveCarousel(1)" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <div class="c-dots" id="cDots"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =====================================================
+     MESA DE REGALOS
+===================================================== -->
+<section id="regalos">
+  <div class="container">
+
+    <div class="section-center fi">
+      <span class="tag">Mesa de Regalos</span>
+      <h2 class="section-title">Tu presencia es el mejor regalo</h2>
+      <div class="divider center"></div>
+    </div>
+
+    <!-- TODO: Update intro text -->
+    <p class="regalos-intro fi">Si deseas hacernos un obsequio, hemos preparado listas en diferentes tiendas para facilitarlo. Gracias de antemano por tu generosidad y cariño.</p>
+
+    <div class="gift-grid fi">
+
+      <div class="gift-card">
+        <div class="gift-logo" style="background:#2C6E49;border-radius:12px;padding:.5rem;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+            <rect x="3" y="6" width="18" height="13" rx="2"/>
+            <path d="M3 10h18"/>
+            <path d="M7 15h2M11 15h4"/>
+          </svg>
+        </div>
+        <h3>Cuenta Bancaria</h3>
+        <p>Si prefieres una transferencia directa, con mucho gusto la recibimos.</p>
+        <!-- TODO: Reemplazar # con el link o anchor a la sección de datos bancarios -->
+        <a href="#datos-banco" class="btn btn-outline-g">Ver Datos →</a>
+      </div>
+
+      <div class="gift-card">
+        <div class="gift-logo" style="background:#C9A96E;border-radius:12px;padding:.5rem;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 11a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 2.98 0h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 7.91"/>
+            <path d="M14 2a4 4 0 0 1 4 4"/>
+            <path d="M14 2a8 8 0 0 1 8 8"/>
+          </svg>
+        </div>
+        <h3>Luna de Miel</h3>
+        <p>Contribuye a nuestra luna de miel y ayúdanos a crear recuerdos inolvidables.</p>
+        <!-- TODO: Agregar link al fondo de luna de miel (ej. HoneyFund, GoFundMe, etc.) -->
+        <a href="https://zepika.com/pages/boda-diego-y-giselle" class="btn btn-outline-g">Contribuir →</a>
+      </div>
+    </div>
+
+    <!-- Bank Transfer -->
+    <div class="bank-box fi" id="datos-banco">
+      <h3>Transferencia Bancaria</h3>
+      <p>Si prefieres hacer una transferencia directa, con mucho gusto la recibimos:</p>
+      <div class="bank-table">
+        <!-- TODO: Reemplazar con los datos bancarios reales de Diego & Giselle -->
+        <div><span>Banco: </span><strong>BBVA</strong></div>
+        <div><span>Nombre: </span><strong>Diego Daniel Carmona Miller</strong></div>
+        <div><span>CLABE: </span><strong>012 180 01518251463 4</strong></div>
+        <div><span>Concepto: </span><strong>Tu nombre</strong></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =====================================================
+     SEDE & HOSPEDAJE
+===================================================== -->
+<section id="sede">
+  <div class="container">
+
+    <div class="section-center fi">
+      <span class="tag">Ubicación y Hospedaje</span>
+      <h2 class="section-title">¿Cómo llegar?</h2>
+      <div class="divider center"></div>
+    </div>
+
+    <div class="sede-layout fi">
+
+      <!-- Google Maps -->
+      <div class="map-box">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.103198490379!2d-99.1258591255583!3d18.971049255260393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce0b2a7e633667%3A0xe00f73f6ac32d86d!2sPiedrasanta%20Jard%C3%ADn%20de%20Eventos!5e0!3m2!1sen!2smx!4v1772161028065!5m2!1sen!2smx"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Piedrasanta Jardín de Eventos — Tepoztlán, Morelos">
+        </iframe>
+      </div>
+
+      <!-- Venue Info -->
+      <div class="venue-card">
+        <h3>Jardín de Eventos Piedrasanta</h3>
+        <p class="venue-addr">
+          Carretera Federal Cuernavaca- Tepoztlán Km 14.1 San Miguel de la Cal, Centro, 62520 Tepoztlán, Mor.
+        </p>
+        <div class="venue-feats">
+          <div class="venue-feat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Valet parking incluido
+          </div>
+          <div class="venue-feat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Acceso desde las 12:30 p.m.
+          </div>
+          <div class="venue-feat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Evento exclusivo para adultos
+          </div>
+          <div class="venue-feat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Aprox. 5 min del centro de Tepoztlán
+          </div>
+        </div>
+        <a href="https://www.google.com/maps/place/Piedrasanta+Jardín+de+Eventos/@18.971049,-99.125859,17z" target="_blank" rel="noopener" class="btn btn-outline">
+          Ver en Google Maps
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Hotels -->
+    <h3 class="hotels-title fi">Opciones de Hospedaje</h3>
+    <div class="hotels-grid">
+
+      <!-- Hotel 1 -->
+      <div class="hotel-card fi">
+        <!-- TODO: Reemplazar con foto real del Hotel Alilo -->
+        <img class="hotel-img"
+          src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80"
+          alt="Hotel Alilo" loading="lazy">
+        <div class="hotel-body">
+          <div class="hotel-stars"><!-- TODO: Agregar estrellas --></div>
+          <div class="hotel-name">Hotel Alilo</div>
+          <div class="hotel-dist">📍 ~5 min del venue</div>
+          <!-- TODO: Agregar descripción, precio y link de reserva -->
+          <p class="hotel-desc"><!-- TODO: Descripción del Hotel Alilo --></p>
+          <div class="hotel-price"><!-- TODO: Precio por noche --></div>
+          <a href="#" class="btn btn-outline" target="_blank" rel="noopener">Reservar →</a>
+        </div>
+      </div>
+
+      <!-- Hotel 2 -->
+      <div class="hotel-card fi">
+        <!-- TODO: Reemplazar con foto real del Hotel Tepoztlán -->
+        <img class="hotel-img"
+          src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80"
+          alt="Hotel Tepoztlán" loading="lazy">
+        <div class="hotel-body">
+          <div class="hotel-stars"><!-- TODO: Agregar estrellas --></div>
+          <div class="hotel-name">Hotel Tepoztlán</div>
+          <div class="hotel-dist">📍 ~5 min del venue</div>
+          <!-- TODO: Agregar descripción, precio y link de reserva -->
+          <p class="hotel-desc"><!-- TODO: Descripción del Hotel Tepoztlán --></p>
+          <div class="hotel-price"><!-- TODO: Precio por noche --></div>
+          <a href="#" class="btn btn-outline" target="_blank" rel="noopener">Reservar →</a>
+        </div>
+      </div>
+
+      <!-- Hotel 3 -->
+      <div class="hotel-card fi">
+        <img class="hotel-img"
+          src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=600&q=80"
+          alt="Hoteles y Airbnbs cercanos" loading="lazy">
+        <div class="hotel-body">
+          <div class="hotel-stars">★★★+</div>
+          <div class="hotel-name">Hoteles y Airbnbs cercanos</div>
+          <div class="hotel-dist">📍 ~5 min del venue</div>
+          <p class="hotel-desc">Hay diversas opciones de hospedaje cerca del jardín. Te recomendamos buscar en Booking.com o Airbnb con el filtro de Tepoztlán, Morelos.</p>
+          <div class="hotel-price"><!-- TODO: Rango de precios referencial --></div>
+          <!-- TODO: Agregar link a búsqueda de Airbnb o Booking si deseas -->
+          <a href="https://www.airbnb.mx/s/Tepoztlan--Mexico/homes" class="btn btn-outline" target="_blank" rel="noopener">Ver opciones →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     RSVP
+===================================================== -->
+<section id="rsvp">
+  <div class="container">
+
+    <div class="section-center fi">
+      <span class="tag">Confirmación de Asistencia</span>
+      <h2 class="section-title">Confirma tu Asistencia</h2>
+      <div class="divider center"></div>
+      <!-- TODO: Actualizar con la fecha límite real de confirmación -->
+      <p style="color:var(--gray-mid);font-weight:300;font-size:.9rem;margin-top:1rem;">
+        Por favor confirma tu asistencia a tiempo <!-- TODO: agregar "antes del DD de Mes de YYYY" -->
+      </p>
+    </div>
+
+    <div class="rsvp-wrap fi">
+      <form id="rsvpForm" onsubmit="handleRSVP(event)" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="nombre">Nombre Completo *</label>
+            <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Correo Electrónico</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="tu@correo.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">¿Asistirás? *</label>
+          <div class="radio-group">
+            <label class="r-label" id="rl-si" onclick="pickRadio('si')">
+              <input type="radio" name="asistencia" value="si"> ✓ Sí, ahí estaré
+            </label>
+            <label class="r-label" id="rl-no" onclick="pickRadio('no')">
+              <input type="radio" name="asistencia" value="no"> ✗ No podré asistir
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="acomp">Número de Acompañantes</label>
+            <input class="form-input" type="number" id="acomp" name="acomp" min="0" max="5" placeholder="0" value="0">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="alergias">Alergias / Restricciones</label>
+            <input class="form-input" type="text" id="alergias" name="alergias" placeholder="Ninguna o especifica aquí">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="mensaje">Mensaje para los Novios (opcional)</label>
+          <textarea class="form-input" id="mensaje" name="mensaje" placeholder="Déjanos una nota especial..."></textarea>
+        </div>
+
+        <!-- TODO: To receive responses, connect this form to Formspree (formspree.io) or a backend -->
+        <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;padding:1rem;">
+          Enviar Confirmación
+        </button>
+
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div style="font-size:3rem;margin-bottom:1rem;">💌</div>
+        <h3>¡Gracias por confirmar!</h3>
+        <p>Hemos recibido tu respuesta. ¡Nos vemos pronto para celebrar juntos!</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+<footer>
+  <div class="footer-mono">D &amp; G</div>
+  <!-- TODO: Agregar hashtag oficial de la boda -->
+  <div class="footer-tag">#D&G2026</div>
+  <div class="footer-date">05 · 09 · 2026 · Tepoztlán, Morelos</div>
+
+  <div class="footer-contacts">
+    <!-- TODO: Agregar información de contacto real -->
+    <div class="fc">
+      <span>La Novia</span>
+      <span>Giselle</span>
+    </div>
+    <div class="fc">
+      <span>El Novio</span>
+      <span>Diego</span>
+    </div>
+    <div class="fc">
+      <span>Concierge</span>
+      <span>Rufino</span>
+      <span>+52 55 6415 5727</span>
+    </div>
+  </div>
+
+  <div class="footer-hr"></div>
+  <div class="footer-copy">© 2026 Diego &amp; Giselle · Hecho con amor ♡</div>
+</footer>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+<script>
+  // =====================================================
+  // TODO: Verificar la hora exacta de inicio con los novios
+  const WEDDING_DATE = new Date('2026-09-05T12:30:00');
+  // =====================================================
+
+  /* ----- Countdown timer ----- */
+  function tick() {
+    const diff = WEDDING_DATE - new Date();
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML =
+        '<p style="font-family:var(--font-serif);font-size:1.6rem;font-style:italic">¡Hoy es el gran día! 🎉</p>';
+      return;
+    }
+    const d = Math.floor(diff / 864e5);
+    const h = Math.floor((diff % 864e5) / 36e5);
+    const m = Math.floor((diff % 36e5) / 6e4);
+    const s = Math.floor((diff % 6e4) / 1e3);
+    document.getElementById('cdDays').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cdMins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cdSecs').textContent  = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ----- Sticky nav ----- */
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ----- Parallax hero ----- */
+  const heroBg = document.getElementById('heroBg');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < window.innerHeight)
+      heroBg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+  }, { passive: true });
+
+  /* ----- Mobile nav toggle ----- */
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  // Close nav on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  /* ----- Fade-in on scroll ----- */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+  /* ----- Carousel ----- */
+  const totalSlides = document.querySelectorAll('.c-slide').length;
+  const cTrack     = document.getElementById('carouselTrack');
+  const cDotsWrap  = document.getElementById('cDots');
+  let cCurrent     = 0;
+  let cPer         = window.innerWidth < 900 ? 1 : 3;
+  let cTimer;
+
+  // Build dots
+  function buildDots() {
+    cDotsWrap.innerHTML = '';
+    const count = totalSlides - cPer + 1;
+    for (let i = 0; i < count; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'c-dot' + (i === 0 ? ' active' : '');
+      btn.setAttribute('aria-label', `Slide ${i + 1}`);
+      btn.onclick = () => { cCurrent = i; render(); };
+      cDotsWrap.appendChild(btn);
+    }
+  }
+
+  function render() {
+    const pct = 100 / cPer;
+    cTrack.style.transform = `translateX(-${cCurrent * pct}%)`;
+    document.querySelectorAll('.c-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === cCurrent));
+  }
+
+  function moveCarousel(dir) {
+    const max = totalSlides - cPer;
+    cCurrent = Math.max(0, Math.min(cCurrent + dir, max));
+    render();
+  }
+
+  function startAuto() {
+    cTimer = setInterval(() => {
+      const max = totalSlides - cPer;
+      cCurrent = cCurrent >= max ? 0 : cCurrent + 1;
+      render();
+    }, 3500);
+  }
+  function pauseCarousel()  { clearInterval(cTimer); }
+  function resumeCarousel() { startAuto(); }
+
+  buildDots(); startAuto();
+
+  window.addEventListener('resize', () => {
+    cPer = window.innerWidth < 900 ? 1 : 3;
+    cCurrent = 0;
+    buildDots(); render();
+  });
+
+  // Touch swipe
+  let tX = 0;
+  cTrack.addEventListener('touchstart', e => { tX = e.touches[0].clientX; }, { passive: true });
+  cTrack.addEventListener('touchend',   e => {
+    const d = tX - e.changedTouches[0].clientX;
+    if (Math.abs(d) > 50) moveCarousel(d > 0 ? 1 : -1);
+  });
+
+  /* ----- RSVP radio buttons ----- */
+  function pickRadio(val) {
+    document.querySelectorAll('.r-label').forEach(l => l.classList.remove('picked'));
+    document.getElementById('rl-' + val).classList.add('picked');
+    document.querySelector(`.r-label[id="rl-${val}"] input`).checked = true;
+  }
+
+  /* ----- RSVP form submit ----- */
+  function handleRSVP(e) {
+    e.preventDefault();
+    // TODO: Replace with your form handler (Formspree, EmailJS, your own API, etc.)
+    // Example with Formspree: add action="https://formspree.io/f/YOUR_ID" method="POST" to <form>
+    document.getElementById('rsvpForm').style.display    = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
